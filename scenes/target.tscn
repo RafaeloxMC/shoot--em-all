@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmys51o00wpne"]
+
+[ext_resource type="PackedScene" uid="uid://cxon17r58kl56" path="res://assets/models/Target.fbx" id="1_b37e2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b37e2"]
+
+[node name="Target" type="Area3D"]
+
+[node name="Target" parent="." instance=ExtResource("1_b37e2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_b37e2")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://creqris58npjs"]
+
+[ext_resource type="Script" uid="uid://r0sox8vrhm75" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://bmys51o00wpne" path="res://scenes/target.tscn" id="1_l6cm7"]
+
+[node name="Main Menu" type="Node3D"]
+script = ExtResource("1_ekxnf")
+
+[node name="Play" parent="." instance=ExtResource("1_l6cm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Play"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23407, 0)
+text = "Play"
+font_size = 64
+
+[node name="Quit" parent="." instance=ExtResource("1_l6cm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Quit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23407, 0)
+text = "Quit"
+font_size = 64
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24486, 0)
+text = "Done!
+Score: 0
+Accuracy: 0%"
+font_size = 64

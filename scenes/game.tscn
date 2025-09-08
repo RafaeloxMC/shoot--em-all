@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyw4w1tu44ah4"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://dyg3a6u8xmifr" path="res://scenes/target_spawner.tscn" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bmys51o00wpne" path="res://scenes/target.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://creqris58npjs" path="res://scenes/main_menu.tscn" id="4_lbhrr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yqjtg"]
+
+[node name="Game" type="Node3D"]
+
+[node name="TargetSpawner" parent="." node_paths=PackedStringArray("main_menu", "player") instance=ExtResource("1_yqjtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.72775, -45.5626)
+target = ExtResource("2_lnu2h")
+main_menu = NodePath("../Main Menu")
+player = NodePath("../ProtoController")
+
+[node name="Timer" type="Timer" parent="TargetSpawner"]
+wait_time = 60.0
+one_shot = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_yqjtg")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="CSGCombiner3D"]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-08, -100, 0, 1, -4.37114e-06, 0, 50, -49.5)
+mesh = SubResource("BoxMesh_yqjtg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.00452044, 0.99999, 0, -0.99999, -0.00452044, 0, 101.274, 55.1807)
+directional_shadow_mode = 0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 101.274, 55.1807)
+directional_shadow_mode = 0
+
+[node name="ProtoController" parent="." instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.233, 0)
+
+[node name="Main Menu" parent="." node_paths=PackedStringArray("player", "target_spawner") instance=ExtResource("4_lbhrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00262284, 1, -5.93846)
+player = NodePath("../ProtoController")
+target_spawner = NodePath("../TargetSpawner")
+
+[connection signal="timeout" from="TargetSpawner/Timer" to="TargetSpawner" method="_on_timer_timeout"]
+
+[editable path="TargetSpawner"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyg3a6u8xmifr"]
+
+[ext_resource type="Script" uid="uid://brn1iy4f31ky8" path="res://scripts/target_spawner.gd" id="1_5sfok"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uaa7n"]
+size = Vector3(10, 4, 1)
+
+[node name="TargetSpawner" type="Area3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_5sfok")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_uaa7n")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29481, 0)
+text = "60.00"
+font_size = 384
+outline_size = 36
