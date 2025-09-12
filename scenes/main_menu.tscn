@@ -28,3 +28,5 @@ text = "Done!
 Score: 0
 Accuracy: 0%"
 font_size = 64
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

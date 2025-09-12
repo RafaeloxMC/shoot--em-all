@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6swktv3tm63f"]
+
+[ext_resource type="Script" uid="uid://bnnv16jxjm8ae" path="res://scripts/ingame_menu.gd" id="1_bl1kb"]
+[ext_resource type="PackedScene" uid="uid://bmys51o00wpne" path="res://scenes/target.tscn" id="2_e6m6p"]
+
+[node name="Ingame Menu" type="Node3D"]
+script = ExtResource("1_bl1kb")
+
+[node name="Exit" parent="." instance=ExtResource("2_e6m6p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23407, 0)
+text = "Exit"
+font_size = 64
+
+[node name="Quit" parent="." instance=ExtResource("2_e6m6p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Quit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23407, 0)
+text = "Quit"
+font_size = 64

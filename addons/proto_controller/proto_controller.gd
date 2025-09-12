@@ -57,6 +57,7 @@ var freeflying : bool = false
 @onready var sprite_2d: AnimatedSprite2D = $Head/Camera3D/Control/Sprite2D
 
 signal shot()
+signal menu_shot()
 
 func _ready() -> void:
 	check_input_mappings()
@@ -80,13 +81,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if ray_cast_3d.is_colliding():
 			var coll = ray_cast_3d.get_collider()
-			if coll != null and coll.name == "Target":
-				var sphere = coll.find_child("Sphere")
-				if sphere != null and sphere is MeshInstance3D:
-					print("Hit")
+			if coll != null:
+				if coll.name == "Target":
+					var sphere = coll.find_child("Sphere")
+					if sphere != null and sphere is MeshInstance3D:
+						print("Hit")
+						sprite_2d.play("hitmarker")
+						shot.emit(true)
+						coll.free()
+						return
+				elif coll.name == "Exit" || coll.name == "Quit":
 					sprite_2d.play("hitmarker")
-					shot.emit(true)
-					coll.free()
+					menu_shot.emit()
 					return
 		shot.emit(false)
 		

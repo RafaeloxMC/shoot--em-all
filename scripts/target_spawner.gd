@@ -61,6 +61,8 @@ func set_enabled():
 	timer.start()
 	
 func calculate_accuracy(hit: bool):
+	if hit == null:
+		return
 	shots += 1
 	if hit:
 		score += 1
@@ -77,3 +79,6 @@ func _on_timer_timeout() -> void:
 	label_3d.hide()
 	enabled = false
 	done.emit(score, floor(accuracy * 100) / 100)
+
+func quit():
+	timer.timeout.emit()

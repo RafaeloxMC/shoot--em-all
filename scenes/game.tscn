@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyw4w1tu44ah4"]
+[gd_scene load_steps=7 format=3 uid="uid://cyw4w1tu44ah4"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://dyg3a6u8xmifr" path="res://scenes/target_spawner.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bmys51o00wpne" path="res://scenes/target.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://creqris58npjs" path="res://scenes/main_menu.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://b6swktv3tm63f" path="res://scenes/ingame_menu.tscn" id="5_iywne"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_yqjtg"]
 
@@ -41,11 +42,19 @@ directional_shadow_mode = 0
 [node name="ProtoController" parent="." instance=ExtResource("1_uwrxv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.233, 0)
 
-[node name="Main Menu" parent="." node_paths=PackedStringArray("player", "target_spawner") instance=ExtResource("4_lbhrr")]
+[node name="Main Menu" parent="." node_paths=PackedStringArray("player", "target_spawner", "ingame_menu") instance=ExtResource("4_lbhrr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00262284, 1, -5.93846)
+player = NodePath("../ProtoController")
+target_spawner = NodePath("../TargetSpawner")
+ingame_menu = NodePath("../Ingame Menu")
+
+[node name="Ingame Menu" parent="." node_paths=PackedStringArray("player", "target_spawner") instance=ExtResource("5_iywne")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.000791073, 1, 5.59536)
+visible = false
 player = NodePath("../ProtoController")
 target_spawner = NodePath("../TargetSpawner")
 
 [connection signal="timeout" from="TargetSpawner/Timer" to="TargetSpawner" method="_on_timer_timeout"]
 
 [editable path="TargetSpawner"]
+[editable path="Ingame Menu"]
