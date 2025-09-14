@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=15 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://bbqiqwu7oe7oi" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
-[ext_resource type="ArrayMesh" uid="uid://c6r5h6286tyqu" path="res://assets/models/gun.obj" id="2_wr06p"]
+[ext_resource type="PackedScene" uid="uid://bxte2w4m5c724" path="res://assets/models/gun/scene.gltf" id="2_6dqce"]
 [ext_resource type="Texture2D" uid="uid://ca3y6s43kch0s" path="res://assets/sprites/crosshair.png" id="3_5hfox"]
+[ext_resource type="AudioStream" uid="uid://cah0j1ynw0clp" path="res://assets/sfx/gun.wav" id="3_6dqce"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -27,7 +28,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 1.5708, 0)]
+"values": [Vector3(0, -1.5708, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_wr06p"]
@@ -44,7 +45,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0166667, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 1.5708, 0), Vector3(-9.83738e-09, 1.5708, 0.226998), Vector3(0, 1.5708, 0)]
+"values": [Vector3(0, -1.5708, 0), Vector3(0, -1.5708, -0.226893), Vector3(0, -1.5708, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5hfox"]
@@ -106,20 +107,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
-[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
-transform = Transform3D(100, 0, 0, 0, -4.37114e-06, -100, 0, 100, -4.37114e-06, 0, -0.00356376, -0.0081619)
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="Gun" type="MeshInstance3D" parent="Head/Camera3D"]
-transform = Transform3D(-1.086e-06, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.086e-06, 0.415756, -0.213056, -0.657337)
-mesh = ExtResource("2_wr06p")
-skeleton = NodePath("../..")
+[node name="Gun" parent="Head/Camera3D" instance=ExtResource("2_6dqce")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 0.55831, -0.321921, -0.908938)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera3D/Gun"]
 libraries = {
 &"": SubResource("AnimationLibrary_5hfox")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Head/Camera3D/Gun"]
+transform = Transform3D(-2.5, 0, -9.15925e-06, 0, 2.5, 0, 9.15925e-06, 0, -2.5, 0.686494, 1.04383, -1.88198)
+stream = ExtResource("3_6dqce")
+max_polyphony = 100
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, -100, 0, 100, -4.37114e-06, 0, -0.00356376, -0.0081619)
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Control" type="Control" parent="Head/Camera3D"]
 layout_mode = 3

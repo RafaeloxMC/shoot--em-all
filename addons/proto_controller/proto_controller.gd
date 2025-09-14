@@ -55,6 +55,7 @@ var freeflying : bool = false
 @onready var animation_player: AnimationPlayer = $Head/Camera3D/Gun/AnimationPlayer
 @onready var ray_cast_3d: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var sprite_2d: AnimatedSprite2D = $Head/Camera3D/Control/Sprite2D
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $Head/Camera3D/Gun/AudioStreamPlayer3D
 
 signal shot()
 signal menu_shot()
@@ -67,6 +68,9 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if not mouse_captured:
+			capture_mouse()
+			return
 		capture_mouse()
 	if Input.is_key_pressed(KEY_ESCAPE):
 		release_mouse()
@@ -78,6 +82,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if mouse_captured and event.is_action_pressed("shoot"):
 		animation_player.play("shoot")
 		print("Shot")
+		audio_stream_player_3d.play()
 		
 		if ray_cast_3d.is_colliding():
 			var coll = ray_cast_3d.get_collider()

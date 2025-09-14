@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Shoot 'Em All"
-run/main_scene="res://scenes/game.tscn"
+run/main_scene="uid://cyw4w1tu44ah4"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
